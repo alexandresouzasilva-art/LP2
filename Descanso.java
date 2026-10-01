@@ -17,9 +17,10 @@ public class Descanso {
     }
 
     public String getStatusGeral(){
-        if((this.horasDescanso / this.numerosSemana) < 26) this.rotina = "cansado";
-        else this.rotina = "descansado";
-
+        if(this.numerosSemana != 0) {
+            if ((this.horasDescanso / this.numerosSemana) < 26) this.rotina = "cansado";
+            else this.rotina = "descansado";
+        }
         return this.rotina;
     }
 }
