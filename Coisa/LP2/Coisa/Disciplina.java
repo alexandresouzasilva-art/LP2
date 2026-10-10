@@ -66,7 +66,7 @@ public class Disciplina {
     }
 
     /**
-     * Adiciona as horas de estudo consumidas em uma disciplina, de modo a somar com as horas já empregadas.
+     * Adiciona as horas de estudo consumidas na disciplina, de modo a somar com as horas já empregadas.
      *
      * @param horasEstudo Horas de estudo
      */

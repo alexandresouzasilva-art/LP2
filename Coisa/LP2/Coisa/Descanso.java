@@ -15,7 +15,7 @@ public class Descanso {
     /**
      * Quantidade em semanas que se transcorreram na rotina.
      */
-    int numerosSemana;
+    int numeroSemanas;
 
     /**
      * Representação do estado da rotina do aluno.
@@ -35,10 +35,10 @@ public class Descanso {
     /**
      * Define a quantidade em semanas que o aluno empregou na sua rotina.
      *
-     * @param numerosSemana Número de semanas.
+     * @param numeroSemanas Número de semanas.
      * */
-    public void defineNumeroSemanas(int numerosSemana){
-        this.numerosSemana = numerosSemana;
+    public void defineNumeroSemanas(int numeroSemanas){
+        this.numeroSemanas = numeroSemanas;
     }
 
     /**
@@ -48,8 +48,8 @@ public class Descanso {
      * @return o estado da rotina do aluno
      */
     public String getStatusGeral(){
-        if(this.numerosSemana != 0) {
-            if ((this.horasDescanso / this.numerosSemana) < 26) this.rotina = "cansado";
+        if(this.numeroSemanas != 0) {
+            if ((this.horasDescanso / this.numeroSemanas) < 26) this.rotina = "cansado";
             else this.rotina = "descansado";
         }
         return this.rotina;
