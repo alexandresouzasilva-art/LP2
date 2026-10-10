@@ -1,4 +1,4 @@
-package LB2.Coisa;
+package LP2.Coisa;
 
 public class Coisa {
     public static void main(String[] args) {

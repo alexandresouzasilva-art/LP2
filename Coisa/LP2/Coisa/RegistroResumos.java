@@ -1,4 +1,4 @@
-package LB2.Coisa;
+package LP2.Coisa;
 
 import java.util.ArrayList;
 import java.util.Arrays;

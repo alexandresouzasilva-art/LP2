@@ -1,4 +1,4 @@
-package LB2.Coisa;
+package LP2.Coisa;
 
 /**
  * Representação do registro de tempo online de um aluno dedicado a uma disciplina, de forma remota. Por padrão,
