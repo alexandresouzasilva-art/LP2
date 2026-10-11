@@ -113,7 +113,6 @@ public class RegistroResumos {
 
     /**
      * Compara a chave de busca com o conteúdo. Modulariza busca.
-     * de um resumo
      *
      * @param conteudo conteúdo.
      * @param chaveDebusca chade de busca.
