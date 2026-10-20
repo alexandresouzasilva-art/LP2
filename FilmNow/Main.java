@@ -116,7 +116,6 @@ public class Main {
 
         if(resultado.equals("SEM RESULTADOS")) {
             System.out.println("POSIÇÃO INVÁLIDA!" );
-            exibirMenu();
         }
         else{
             System.out.println(resultado);
