@@ -3,30 +3,25 @@ package LP2.FilmNow;
 import static java.lang.String.format;
 
 public class HotList {
-    private Filme[] filmes = new Filme[10];
+    private int[] filmes;
 
-    public HotList(){}
+    public HotList(){
+        this.filmes = new int[10];
+    }
 
-    public String atribuirHot(Filme filme, int indiceLista){
-        filmes[indiceLista] = filme;
+    public String atribuirHot(int filme, int indiceLista){
+        this.filmes[indiceLista - 1] = filme;
 
         return format("ADICIONANDO À HOTLIST NA POSIÇÃO %d", indiceLista);
     }
 
 
-    public String[] listarHots(){
-        String[] resultado = new String[10];
-
-        for(int q = 0;q < 10;q ++) {
-            if(filmes[q] != null) {
-                resultado[q] = format("%d - %s", (q + 1), filmes[q].toString());
-            }
-        }
-        return resultado;
+    public int[] listarHots(){
+        return this.filmes;
     }
 
     public void removerHot(int indiceFilme){
-        this.filmes[indiceFilme] = null;
+        this.filmes[indiceFilme - 1] = 0;
     }
 }
 

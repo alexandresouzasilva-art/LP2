@@ -1,50 +1,80 @@
 package LP2.FilmNow;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
+
+/**
+ *
+ */
 public class Main {
-    final static private String string = """
-            (A)Adicionar filme
-            (M)Mostrar todos
-            (D)Detalhar filme
-            (E)Exibir HotList
-            (H)Atribuir Hot
-            (R)Remover Hot
-            (S)Sair
-            """;
+    final static private String string = "(A)Adicionar filme\n" +
+            "(M)Mostrar todos\n" +
+            "(D)Detalhar filme\n" +
+            "(E)Exibir HotList\n" +
+            "(H)Atribuir Hot\n" +
+            "(R)Remover Hot\n" +
+            "(S)Sair\n" +
+            "Opção> ";
+
 
     final static Scanner scanner = new Scanner(System.in);
-    final static private FilmNow fimNow = new FilmNow();
+    final static private FilmNow filmNow = new FilmNow();
     final static private HotList hotList = new HotList();
 
     public static void main(String[] args){
         char entrada;
 
+        LeituraCsv leituraCsv = new LeituraCsv();
 
-        exibirMenu();
+        try {
+            LeituraCsv.lerArquivo("filmes_inicial.csv", filmNow);
+        } catch (FileNotFoundException e) {
+            System.err.println("Arquivo não encontrado: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Erro lendo arquivo: " + e.getMessage());
+        }
 
-        do{
-            entrada = scanner.nextLine().charAt(0);
-
-            switch (entrada){
-                case 'A':
-                    adicionarFilme();
-                    break;
-                case 'M':
-                    mostrarTodos();
-                    break;
-                case 'D':
-                    exibirDetalhes();
-                case 'E':
-                    exibirHotList();
-                case 'H':
-
-            }
-        } while (entrada != 'S');
+        while(true){
+            entrada = exibirMenu();
+            opcoes(entrada);
+        }
     }
 
-    public static void exibirMenu(){
-        System.out.println(string);
+    public static char exibirMenu(){
+        System.out.print(string);
+
+        return scanner.next().toUpperCase().charAt(0);
+    }
+
+    public static void opcoes(char entrada){
+        switch (entrada){
+            case 'A':
+                adicionarFilme();
+                break;
+            case 'M':
+                mostrarTodos();
+                break;
+            case 'D':
+                exibirDetalhes();
+                break;
+            case 'E':
+                exibirHotList();
+                break;
+            case 'H':
+                atribuirHot();
+                break;
+            case'R':
+                removerHot();
+                break;
+            case 'S':
+                sair();
+                break;
+            default:
+                System.out.println("OPÇÃO INVÁLIDA!");
+        }
+
     }
 
     public static void adicionarFilme(){
@@ -71,15 +101,18 @@ public class Main {
         local = scanner.nextLine();
 
 
-        System.out.println(fimNow.adicionaFilme(posicao, nome,  dataLancamento, local));
+        System.out.println(filmNow.adicionaFilme(posicao, nome,  dataLancamento, local));
     }
 
     public static void mostrarTodos(){
-        System.out.println(fimNow.listaFilmes());
+        System.out.print(filmNow.listaFilmes());
     }
 
     public static void exibirDetalhes(){
-        String resultado = fimNow.detalhaFilme(scanner.nextInt());
+        System.out.print("Posição> ");
+        int indice = scanner.nextInt();
+
+        String resultado = filmNow.detalhaFilme(indice);
 
         if(resultado.equals("SEM RESULTADOS")) {
             System.out.println("POSIÇÃO INVÁLIDA!" );
@@ -91,10 +124,29 @@ public class Main {
     }
 
     public static void exibirHotList(){
-        for(String linha : hotList.listarHots()) System.out.println(linha);
+        for(int indice : hotList.listarHots()) {
+            if(indice != 0) {
+                System.out.println(filmNow.detalhaFilme(indice));
+            }
+        }
     }
 
     public static void atribuirHot(){
+        System.out.print("Filme> ");
+        int filme = scanner.nextInt(); scanner.nextLine();
+        System.out.print("Posição> ");
+        int posicao = scanner.nextInt(); scanner.nextLine();
 
+        filmNow.alteraStatusFilme(filme);
+        hotList.atribuirHot(filme, posicao);
     }
+
+    public static void removerHot(){
+        System.out.print("Posição> ");
+        int posicao = scanner.nextInt(); scanner.nextLine();
+
+        hotList.removerHot(posicao);
+    }
+
+    public static void sair(){System.exit(0);}
 }
